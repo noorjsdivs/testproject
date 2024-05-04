@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import Button from "./ui/Button";
+import { useLocation } from "react-router-dom";
 const Header = () => {
+  const location = useLocation();
+  const pathname = location.pathname;
+
   const navigationArray = [
     { title: "Home", link: "/" },
     { title: "About", link: "/about" },
@@ -22,7 +26,11 @@ const Header = () => {
         <div className="flex items-center gap-6">
           {navigationArray.map(({ title, link }) => (
             <Link key={link} to={link}>
-              <p className="text-sm uppercase text-lightText font-semibold hover:text-designColor cursor-pointer duration-300">
+              <p
+                className={`${
+                  pathname === link ? "text-designColor" : "text-lightText"
+                } text-sm uppercase font-semibold hover:text-designColor cursor-pointer duration-300 `}
+              >
                 {title}
               </p>
             </Link>
